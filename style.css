@@ -1,0 +1,318 @@
+/* ==============================
+   SPLASH SCREEN
+   ============================== */
+
+#splashScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(80, 100, 255, 0.25), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(150, 70, 255, 0.20), transparent 30%),
+        #0b1020;
+
+    text-align: center;
+}
+
+.splash-logo {
+    font-size: 72px;
+    margin-bottom: 20px;
+}
+
+#splashScreen h1 {
+    font-size: 38px;
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+#splashScreen p {
+    margin: 0;
+    color: #aeb6d4;
+    font-size: 16px;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 35px;
+}
+
+.loading-dots span {
+    font-size: 16;
+    pxcolor: #0a71f03b;
+}* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1f3a;
+    color: #10bcf1;
+}
+
+.app {
+    width: 90%;
+    max-width: 430px;
+    margin: 40px auto;
+}
+
+h1 {
+    font-size: 38px;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+}
+
+.tagline {
+    color: #666;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 28px;
+}
+
+.task-box {
+    background: white;
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.task-box > p:first-child {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    border: 2px solid #d9d9d9;
+    border-radius: 16px;
+    font-size: 15px;
+    resize: none;
+    outline: none;
+    background: #fafafa;
+    font-family: Arial, sans-serif;
+}
+
+textarea:focus {
+    border-color: #171717;
+}
+
+.voice-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+select {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #d9d9d9;
+    border-radius: 14px;
+    background: #fafafa;
+    font-size: 14px;
+}
+
+#voiceButton {
+    flex: 1;
+    margin-top: 0;
+    padding: 12px;
+    border: 2px solid #171717;
+    border-radius: 14px;
+    background: white;
+    color: #171717;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#voiceStatus {
+    min-height: 18px;
+    margin: 8px 0 0 2px;
+    color: #777;
+    font-size: 12px;
+}
+
+#thinkButton {
+    width: 100%;
+    margin-top: 12px;
+    padding: 15px;
+    border: none;
+    border-radius: 16px;
+    background: #171717;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+h2 {
+    margin-top: 28px;
+    margin-bottom: 10px;
+}
+
+
+/* =========================
+   TASK CARD
+   ========================= */
+
+.task-card {
+    background: white;
+    margin-top: 15px;
+    padding: 18px;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Priority circle */
+
+.priority-circle {
+    width: 16px;
+    height: 16px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+
+/* Priority colours */
+
+.priority-high {
+    background: #e53935;
+}
+
+.priority-important {
+    background: #f57c00;
+}
+
+.priority-medium {
+    background: #fbc02d;
+}
+
+.priority-low {
+    background: #43a047;
+}
+
+
+.task-number {
+    font-size: 20px;
+    font-weight: bold;
+    min-width: 30px;
+}
+
+.task-card h3 {
+    margin: 0 0 6px 0;
+    font-size: 17px;
+}
+
+.task-card p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+/* ==============================
+   CALENDAR
+   ============================== */
+
+.calendar-section {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+}
+
+#calendarButton {
+    flex: 1;
+    padding: 13px;
+    border: 2px solid #171717;
+    border-radius: 14px;
+    background: white;
+    color: #171717;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#calendarInput {
+    flex: 1;
+    padding: 13px;
+    border: 2px solid #d9d9d9;
+    border-radius: 14px;
+    background: white;
+    font-size: 14px;
+    color: #171717;
+}
+/* ==============================
+   REMINDER
+   ============================== */
+
+.reminder-section {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reminder-section label {
+    flex: 1;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#reminderInput {
+    flex: 1;
+    padding: 13px;
+    border: 2px solid #d9d9d9;
+    border-radius: 14px;
+    background: white;
+    font-size: 14px;
+    color: #171717;
+}
+/* ==============================
+   WHITE BOXES
+   ============================== */
+
+.reminder-section {
+    background: white !important;
+    padding: 18px !important;
+    border-radius: 20px !important;
+    margin-top: 18px !important;
+    color: #171717 !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+.priority-box {
+    background: white !important;
+    padding: 20px !important;
+    border-radius: 22px !important;
+    margin-top: 25px !important;
+    color: #171717 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.priority-box h2 {
+    margin-top: 0 !important;
+    color: #171717 !important;
+}
+
+.priority-guide {
+    background: #f7f7f7 !important;
+    padding: 16px !important;
+    border-radius: 16px !important;
+    margin-top: 12px !important;
+    color: #171717 !important;
+}

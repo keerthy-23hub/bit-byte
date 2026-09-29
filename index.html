@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Think For You</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splashScreen">
+
+        <div class="splash-logo">
+            🧠✓
+        </div>
+
+        <h1>Think For You</h1>
+
+        <p>You Say. It Sorts. You Do.</p>
+
+        <div class="loading-dots">
+            <span>●</span>
+            <span>●</span>
+            <span>●</span>
+        </div>
+
+    </div>
+
+
+    <!-- MAIN APP -->
+    <div class="app">
+
+        <h1>Think For You</h1>
+
+        <p class="tagline">
+            You Say. It Sorts. You Do.
+        </p>
+
+
+        <!-- TASK BOX -->
+        <div class="task-box">
+
+            <p>What do you need to do?</p>
+
+            <textarea
+                id="taskInput"
+                placeholder="Tell me anything..."
+            ></textarea>
+
+
+            <!-- LANGUAGE + VOICE -->
+            <div class="voice-row">
+
+                <select id="languageSelect">
+
+                    <option value="en-IN">
+                        English
+                    </option>
+
+                    <option value="ta-IN">
+                        தமிழ்
+                    </option>
+
+                </select>
+
+
+                <button id="voiceButton" type="button">
+                    🎤 Speak
+                </button>
+
+            </div>
+
+
+            <p id="voiceStatus"></p>
+
+
+            <button id="thinkButton">
+                Think For Me ✨
+            </button>
+
+        </div>
+
+
+        <!-- CALENDAR -->
+        <div class="calendar-section">
+
+            <button id="calendarButton" type="button">
+                📅 Calendar
+            </button>
+
+            <input
+                type="date"
+                id="calendarInput"
+            >
+
+        </div>
+
+
+        <!-- REMINDER / ALARM -->
+        <div class="reminder-section">
+
+            <label for="reminderInput">
+                ⏰ Reminder
+            </label>
+
+            <input
+                type="time"
+                id="reminderInput"
+            >
+
+        </div>
+
+
+        <!-- PRIORITIES -->
+        <div class="priority-box">
+
+            <h2>Your Priorities</h2>
+
+
+            <!-- PRIORITY GUIDE -->
+            <div class="priority-guide">
+
+                <div class="guide-title">
+                    💡 Priority Guide
+                </div>
+
+                <div class="guide-item">
+                    🔴 High
+                </div>
+
+                <div class="guide-item">
+                    🟠 Important
+                </div>
+
+                <div class="guide-item">
+                    🟡 Medium
+                </div>
+
+                <div class="guide-item">
+                    🟢 Low
+                </div>
+
+            </div>
+
+
+            <!-- TASKS WILL APPEAR HERE -->
+            <div id="priorityList"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
