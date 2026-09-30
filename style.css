@@ -151,18 +151,28 @@ select {
     color: #777;
     font-size: 12px;
 }
-
 #thinkButton {
     width: 100%;
     margin-top: 12px;
     padding: 15px;
     border: none;
     border-radius: 16px;
-    background: #171717;
+    background: linear-gradient(135deg, #2575fc, #7b2ff7);
     color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 5px 15px rgba(70, 80, 220, 0.25);
+}
+
+#thinkButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(70, 80, 220, 0.35);
+}
+
+#thinkButton:active {
+    transform: scale(0.98);
 }
 
 h2 {
@@ -317,7 +327,7 @@ h2 {
 
 .priority-box h2 {
     margin-top: 0 !important;
-    color: #171717 !important;
+    color: #2575fc !important;
 }
 
 .priority-guide {
@@ -326,4 +336,7 @@ h2 {
     border-radius: 16px !important;
     margin-top: 12px !important;
     color: #171717 !important;
+}#priorityGuideTitle {
+    color: #2575fc !important;
+    font-weight: bold;
 }
