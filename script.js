@@ -19,6 +19,35 @@ languageSelect.addEventListener("change", function () {
 
     const isTamil = languageSelect.value === "ta-IN";
 
+    // ==============================
+// PRIORITY GUIDE - LANGUAGE
+// ==============================
+
+const guideTitle = document.querySelector(".guide-title");
+const guideItems = document.querySelectorAll(".guide-item");
+
+if (guideTitle) {
+    guideTitle.textContent =
+        isTamil
+            ? "💡 முன்னுரிமை வழிகாட்டி"
+            : "💡 Priority Guide";
+}
+
+if (guideItems.length >= 4) {
+
+    guideItems[0].textContent =
+        isTamil ? "🔴 அதிக முன்னுரிமை" : "🔴 High";
+
+    guideItems[1].textContent =
+        isTamil ? "🟠 முக்கியமானது" : "🟠 Important";
+
+    guideItems[2].textContent =
+        isTamil ? "🟡 நடுத்தர முன்னுரிமை" : "🟡 Medium";
+
+    guideItems[3].textContent =
+        isTamil ? "🟢 குறைந்த முன்னுரிமை" : "🟢 Low";
+}
+
     document.querySelector(".task-box > p:first-child").textContent =
         isTamil ? "என்ன செய்ய வேண்டும்?" : "What do you need to do?";
 
@@ -40,10 +69,33 @@ languageSelect.addEventListener("change", function () {
     document.querySelector("h2").textContent =
         isTamil ? "உங்கள் முன்னுரிமைகள்" : "Your Priorities";
 
+
+    // PRIORITY GUIDE
+    const priorityGuideTitle =
+        document.getElementById("priorityGuideTitle");
+
+    if (priorityGuideTitle) {
+        priorityGuideTitle.textContent =
+            isTamil
+                ? "💡 முன்னுரிமை வழிகாட்டி"
+                : "💡 Priority Guide";
+    }
+
+
+    // "I MISSED THIS" BUTTONS
+    document.querySelectorAll(".missed-button").forEach(function(button) {
+
+        button.textContent =
+            isTamil
+                ? "நான் இதை தவறவிட்டேன்"
+                : "I missed this";
+
+    });
+
+
     voiceStatus.textContent =
         isTamil ? "தமிழ் தேர்ந்தெடுக்கப்பட்டது" : "English selected";
 });
-
 
 // ==============================
 // THINK FOR ME
@@ -70,7 +122,7 @@ if (calendarInput.value) {
     const formattedDate =
         selectedDate.toLocaleDateString("en-IN", {
             day: "numeric",
-            month: "short",
+            month: "long",
             year: "numeric"
         });
 
@@ -90,6 +142,44 @@ if (waitingForDeadline) {
     taskInfo.details = updatedTaskInfo.details;
 
     voiceStatus.textContent = "";
+// ==============================
+// PRIORITY GUIDE LANGUAGE
+// ==============================
+
+const priorityGuideTitle =
+    document.getElementById("priorityGuideTitle");
+
+if (priorityGuideTitle) {
+    priorityGuideTitle.textContent =
+        isTamil
+            ? "💡 முன்னுரிமை வழிகாட்டி"
+            : "💡 Priority Guide";
+}
+
+const highText = document.getElementById("priorityHighText");
+const importantText = document.getElementById("priorityImportantText");
+const mediumText = document.getElementById("priorityMediumText");
+const lowText = document.getElementById("priorityLowText");
+
+if (highText) {
+    highText.textContent =
+        isTamil ? "அதிக முன்னுரிமை" : "High";
+}
+
+if (importantText) {
+    importantText.textContent =
+        isTamil ? "முக்கியமானது" : "Important";
+}
+
+if (mediumText) {
+    mediumText.textContent =
+        isTamil ? "நடுத்தர முன்னுரிமை" : "Medium";
+}
+
+if (lowText) {
+    lowText.textContent =
+        isTamil ? "குறைந்த முன்னுரிமை" : "Low";
+}
 }
 
 else if (taskInfo.details === "New task") {
@@ -157,16 +247,35 @@ details.textContent = taskDetails;
     // Missed task button
     const missedButton = document.createElement("button");
 
-    missedButton.textContent = "I missed this";
+   missedButton.textContent =
+    languageSelect.value === "ta-IN"
+        ? "நான் இதை தவறவிட்டேன்"
+        : "I missed this";
 
     missedButton.addEventListener("click", function () {
         missedButton.style.display = "none";
         markTaskAsMissed(card);
     });
 
-    card.appendChild(missedButton);
+card.appendChild(missedButton);
 
-    priorityList.appendChild(card);
+// ==============================
+// DELETE TASK
+// ==============================
+
+const deleteButton = document.createElement("button");
+
+deleteButton.textContent = "🗑️ Delete";
+
+deleteButton.addEventListener("click", function () {
+
+    card.remove();
+
+});
+
+card.appendChild(deleteButton);
+
+priorityList.appendChild(card);
 
     sortTasksByPriority();
 
@@ -302,36 +411,155 @@ function getTemporaryPriority(taskInfo) {
 
     const details = taskInfo.details.toLowerCase();
 
-    // HIGH — due today
-    if (details.includes("today")) {
+    let deadlineDays = 7;
+    let durationMinutes = 0;
+
+    // ==============================
+    // DEADLINE
+    // ==============================
+
+    if (
+        details.includes("today") ||
+        details.includes("இன்று")
+    ) {
+        deadlineDays = 0;
+    }
+
+    // MUST CHECK THIS BEFORE "tomorrow"
+    else if (
+        details.includes("day after tomorrow") ||
+        details.includes("நாளை மறுநாள்")
+    ) {
+        deadlineDays = 2;
+    }
+
+    else if (
+        details.includes("tomorrow") ||
+        details.includes("நாளை") ||
+        details.includes("நாளைக்கு")
+    ) {
+        deadlineDays = 1;
+    }
+
+    else if (
+        details.includes("next week") ||
+        details.includes("அடுத்த வாரம்")
+    ) {
+        deadlineDays = 7;
+    }
+
+    else if (
+        details.includes("next month") ||
+        details.includes("அடுத்த மாதம்")
+    ) {
+        deadlineDays = 30;
+    }
+
+    // ==============================
+    // DURATION
+    // ==============================
+
+    const hourMatch = details.match(
+        /(\d+(?:\.\d+)?)\s*(hours?|hrs?)/
+    );
+
+    if (hourMatch) {
+        durationMinutes = parseFloat(hourMatch[1]) * 60;
+    }
+
+    const minuteMatch = details.match(
+        /(\d+)\s*(minutes?|mins?)/
+    );
+
+    if (minuteMatch) {
+        durationMinutes += parseInt(minuteMatch[1]);
+    }
+
+    // ==============================
+    // DEADLINE SCORE
+    // ==============================
+
+    let urgencyScore = 0;
+
+    if (deadlineDays === 0) {
+        urgencyScore = 100;
+    }
+    else if (deadlineDays === 1) {
+        urgencyScore = 70;
+    }
+    else if (deadlineDays === 2) {
+        urgencyScore = 40;
+    }
+    else if (deadlineDays <= 7) {
+        urgencyScore = 20;
+    }
+    else {
+        urgencyScore = 10;
+    }
+
+    // ==============================
+    // TIME REQUIRED SCORE
+    // ==============================
+
+    let workloadScore = 0;
+
+    if (durationMinutes >= 300) {
+        workloadScore = 40;       // 5 hours+
+    }
+    else if (durationMinutes >= 180) {
+        workloadScore = 30;       // 3–4 hours
+    }
+    else if (durationMinutes >= 120) {
+        workloadScore = 25;       // 2 hours
+    }
+    else if (durationMinutes >= 60) {
+        workloadScore = 20;       // 1 hour
+    }
+    else if (durationMinutes >= 30) {
+        workloadScore = 10;       // 30–59 minutes
+    }
+    else if (durationMinutes > 0) {
+        workloadScore = 5;        // 1–29 minutes
+    }
+
+    // ==============================
+    // FINAL SCORE
+    // ==============================
+
+    const priorityScore =
+        urgencyScore + workloadScore;
+
+    // ==============================
+    // PRIORITY COLOUR
+    // ==============================
+
+    if (priorityScore >= 100) {
         return {
             name: "High",
             className: "priority-high"
         };
     }
 
-    // IMPORTANT — due tomorrow
-    if (details.includes("tomorrow")) {
+    if (priorityScore >= 70) {
         return {
             name: "Important",
             className: "priority-important"
         };
     }
 
-    // MEDIUM — due day after tomorrow
-    if (details.includes("day after tomorrow")) {
+    if (priorityScore >= 40) {
         return {
             name: "Medium",
             className: "priority-medium"
         };
     }
 
-    // LOW — no urgent deadline
     return {
         name: "Low",
         className: "priority-low"
     };
 }
+    
 function sortTasksByPriority() {
 
     const order = {
@@ -394,9 +622,39 @@ if (SpeechRecognition) {
     recognition.continuous = false;
     recognition.interimResults = false;
 
+    let isListening = false;
+
     voiceButton.addEventListener("click", function () {
 
+        // STOP
+        if (isListening) {
+
+            recognition.stop();
+            isListening = false;
+
+            voiceButton.classList.remove("listening");
+
+            voiceButton.textContent =
+                languageSelect.value === "ta-IN"
+                    ? "🎤 பேசுங்கள்"
+                    : "🎤 Speak";
+
+            voiceStatus.textContent = "";
+
+            return;
+        }
+
+        // START
         recognition.lang = languageSelect.value;
+
+        isListening = true;
+
+        voiceButton.classList.add("listening");
+
+        voiceButton.textContent =
+            languageSelect.value === "ta-IN"
+                ? "🛑 நிறுத்து"
+                : "🛑 Stop";
 
         voiceStatus.textContent =
             languageSelect.value === "ta-IN"
@@ -408,18 +666,30 @@ if (SpeechRecognition) {
 
     recognition.onresult = function (event) {
 
-        const spokenText =
-            event.results[0][0].transcript;
+        if (event.results[0].isFinal) {
 
-        taskInput.value = spokenText;
+            const spokenText =
+                event.results[0][0].transcript;
 
-        voiceStatus.textContent =
-            languageSelect.value === "ta-IN"
-                ? "✅ முடிந்தது"
-                : "✅ Done";
+            taskInput.value = spokenText;
+
+            voiceStatus.textContent =
+                languageSelect.value === "ta-IN"
+                    ? "✅ முடிந்தது"
+                    : "✅ Done";
+        }
     };
 
     recognition.onerror = function () {
+
+        isListening = false;
+
+        voiceButton.classList.remove("listening");
+
+        voiceButton.textContent =
+            languageSelect.value === "ta-IN"
+                ? "🎤 பேசுங்கள்"
+                : "🎤 Speak";
 
         voiceStatus.textContent =
             languageSelect.value === "ta-IN"
@@ -429,10 +699,14 @@ if (SpeechRecognition) {
 
     recognition.onend = function () {
 
-        if (voiceStatus.textContent.includes("Listening") ||
-            voiceStatus.textContent.includes("கேட்கிறேன்")) {
-            voiceStatus.textContent = "";
-        }
+        isListening = false;
+
+        voiceButton.classList.remove("listening");
+
+        voiceButton.textContent =
+            languageSelect.value === "ta-IN"
+                ? "🎤 பேசுங்கள்"
+                : "🎤 Speak";
     };
 
 } else {
@@ -463,5 +737,4 @@ window.addEventListener("load", function () {
     }, 2000);
 
 });
-
 
